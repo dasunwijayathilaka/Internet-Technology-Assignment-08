@@ -2,80 +2,184 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="description" content="que design used js">
+  <meta name="keywords" content="java, html, css, js, go, react, angular">
+  <meta name="author" content="ijse">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Queue Process</title>
+  <link rel="icon" type="image/x-icon" href="">
+  <link rel="stylesheet" href="assets/styles/normalize.css">
+  <title>que design used js</title>
+
   <style>
     body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
+      padding: 0;
+      margin: 0;
+      overflow-x: hidden;
+      background-color: black;
     }
-
-    .queue-container {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
+    .que-01-section {
+      display: flex;
+      flex-direction: row;
+      color: white;
+      justify-content: space-evenly;
+      margin-top: 100px;
+      font-size: 27px;
     }
-
-    .queue-item {
-        width: 50px;
-        height: 50px;
-        background-color: grey;
-        border: 2px solid red;
-        transition: background-color 0.5s ease;
+    .title-que {
+      color: hotpink;
+      font-weight: bold;
+      font-size: 5vw;
+      text-align: center;
     }
-
-    .active {
-        background-color: red;
-    }
-
-    .controls {
-        margin-top: 20px;
-    }
-
     button {
-        padding: 10px 20px;
-        margin: 5px;
-        cursor: pointer;
+      align-items: center;
+    }
+    .button-section {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+
+    .que-02-section {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: center;
+      margin-top: 150px;
+      /*width: 600px;*/
+    }
+
+    .que-2-div {
+      height: 4vw;
+      width: 11vw;
+      background-color: red;
+      border: 2px solid black;
+      margin: 8px;
+      border-radius: 10px;
+    }
+    .que-02-section02 {
+      display: flex;
+      width: 45vw;
+      justify-content: center;
+    }
+
+    .que-02-section01 {
+      /*background: green;*/
+      width: 71vw;
+      border-bottom: 2px solid white;
+
+    }
+
+    .que-02-section03 {
+      display: flex;
+      width: 71vw;
+      justify-content: flex-end;
+      border-top: 2px solid white;
+    }
+
+    .button {
+      height: 100px;
+      width: 100px;
+      background: #f8c032;
+      color: white;
+      border-radius: 100px;
+    }
+    #btn-stop {
+      background-color: red;
+    }
+    .button-section {
+      margin-top: 50px;
     }
   </style>
 </head>
+
 <body>
-<div class="queue-container">
-  <div class="queue-item" id="item1"></div>
-  <div class="queue-item" id="item2"></div>
-  <div class="queue-item" id="item3"></div>
-  <div class="queue-item" id="item4"></div>
-</div>
-<div class="controls">
-  <button id="start">Start Queue</button>
-  <button id="stop">Stop Queue</button>
-</div>
+<div class="title-que">JS Que</div>
+
+<section class="button-section">
+  <button class="button" id="btn-start">Start</button>
+  <button class="button" id="btn-stop">Stop</button>
+</section>
+
+<section class="que-01-section">
+  <div id="div1">A</div>
+  <div id="div2">B</div>
+  <div id="div3">C</div>
+  <div id="div4">D</div>
+  <div id="div5">E</div>
+  <div id="div6">F</div>
+</section>
+
+<section class="que-02-section">
+  <div class="que-02-section01">
+    <div class="que-2-div" id="color1"></div>
+  </div>
+  <div class="que-02-section02">
+    <div class="que-2-div" id="color2"></div>
+    <div class="que-2-div" id="color3"></div>
+    <div class="que-2-div" id="color4"></div>
+    <div class="que-2-div" id="color5"></div>
+  </div>
+  <div class="que-02-section03">
+    <div class="que-2-div" id="color6"></div>
+  </div>
+</section>
+
+
+
+
 
 <script>
-  let items = document.querySelectorAll('.queue-item');
-  let current = 0;
-  let interval;
 
-  function startQueue() {
-      stopQueue(); // Stop previous interval if any
-      interval = setInterval(() => {
-          items.forEach(item => item.classList.remove('active'));
-          items[current].classList.add('active');
-          current = (current + 1) % items.length;
-      }, 1000);
-  }
+  let start_button = document.getElementById("btn-start")
+  let stop_button = document.getElementById("btn-stop")
 
-  function stopQueue() {
-      clearInterval(interval);
-  }
+  let intervalId;
 
-  document.getElementById('start').addEventListener('click', startQueue);
-  document.getElementById('stop').addEventListener('click', stopQueue);
+  document.getElementById("color1").style.backgroundColor="red";
+  document.getElementById("color2").style.backgroundColor="green";
+  document.getElementById("color3").style.backgroundColor="blue";
+  document.getElementById("color4").style.backgroundColor="yellow"
+  document.getElementById("color5").style.backgroundColor="blanchedalmond";
+  document.getElementById("color6").style.backgroundColor="hotpink";
+
+  start_button.addEventListener('click', function () {
+    let ar = ["A", "B", "C", "D", "E", "F"];
+    let arr = ["red", "green", "blue", "yellow", "blanchedalmond", "hotpink"];
+
+    intervalId = setInterval(() => {
+
+      let last_value = ar.pop();
+      let arrLastValue = arr.pop();
+
+      ar.unshift(last_value);
+      arr.unshift(arrLastValue);
+
+
+      console.log(ar);
+
+      document.getElementById("div1").innerText=ar[0];
+      document.getElementById("div2").innerText=ar[1];
+      document.getElementById("div3").innerText=ar[2];
+      document.getElementById("div4").innerText=ar[3];
+      document.getElementById("div5").innerText=ar[4];
+      document.getElementById("div6").innerText=ar[5];
+
+      document.getElementById("color1").style.backgroundColor=arr[0];
+      document.getElementById("color2").style.backgroundColor=arr[1];
+      document.getElementById("color3").style.backgroundColor=arr[2];
+      document.getElementById("color4").style.backgroundColor=arr[3];
+      document.getElementById("color5").style.backgroundColor=arr[4];
+      document.getElementById("color6").style.backgroundColor=arr[5];
+    }, 1500);
+
+  })
+
+  stop_button.addEventListener('click', function () {
+    clearInterval(intervalId);
+  });
 </script>
+
 </body>
 </html>
