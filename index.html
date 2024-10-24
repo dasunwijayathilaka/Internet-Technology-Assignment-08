@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Queue Process</title>
+  <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+    }
+
+    .queue-container {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .queue-item {
+        width: 50px;
+        height: 50px;
+        background-color: grey;
+        border: 2px solid red;
+        transition: background-color 0.5s ease;
+    }
+
+    .active {
+        background-color: red;
+    }
+
+    .controls {
+        margin-top: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="queue-container">
+  <div class="queue-item" id="item1"></div>
+  <div class="queue-item" id="item2"></div>
+  <div class="queue-item" id="item3"></div>
+  <div class="queue-item" id="item4"></div>
+</div>
+<div class="controls">
+  <button id="start">Start Queue</button>
+  <button id="stop">Stop Queue</button>
+</div>
+
+<script>
+  let items = document.querySelectorAll('.queue-item');
+  let current = 0;
+  let interval;
+
+  function startQueue() {
+      stopQueue(); // Stop previous interval if any
+      interval = setInterval(() => {
+          items.forEach(item => item.classList.remove('active'));
+          items[current].classList.add('active');
+          current = (current + 1) % items.length;
+      }, 1000);
+  }
+
+  function stopQueue() {
+      clearInterval(interval);
+  }
+
+  document.getElementById('start').addEventListener('click', startQueue);
+  document.getElementById('stop').addEventListener('click', stopQueue);
+</script>
+</body>
+</html>
